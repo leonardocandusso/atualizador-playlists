@@ -15,6 +15,21 @@ app.get("/callback", (requisicao, resposta) => {
   resposta.send("Olá! Aqui está é Spotify");
 });
 
+// --- LOGIN ---
+
+app.get("/login", (requisicao, resposta) => {
+  const permissoesDoSpotify = [
+    "playlist-read-private",
+    "playlist-read-collaborative",
+  ];
+
+  const linkDeLogin = spotifyApi.createAuthorizeURL(
+    permissoesDoSpotify,
+    "estado-transferidor",
+  );
+  resposta.redirect(linkDeLogin);
+});
+
 const PORTA = 3000;
 app.listen(PORTA, () => {
   console.log(`teste spotify ${PORTA}...`);
