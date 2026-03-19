@@ -36,6 +36,19 @@ app.get("/login", (requisicao, resposta) => {
   resposta.redirect(linkDeLogin);
 });
 
+app.get("/", (requisicao, resposta) => {
+  resposta.send(`
+    <div style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
+      <h1>Bem-vindo ao Atualizador de Playlists 🎧</h1>
+      <p>Transfira suas músicas entre Spotify e YouTube facilmente.</p>
+      <br>
+      <a href="/login" style="padding: 10px 20px; background-color: #1DB954; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+        Entrar com o Spotify
+      </a>
+    </div>
+  `);
+});
+
 app.get("/callback", async (requisicao, resposta) => {
   try {
     const codigoSpotify = requisicao.query.code;
@@ -44,12 +57,26 @@ app.get("/callback", async (requisicao, resposta) => {
     const meuAccessToken = dadosDoSpotify.body.access_token;
     console.log("MEU ACCESS TOKEN É:", meuAccessToken);
 
+    spotifyApi.setAccessToken(meuAccessToken);
+    const minhasPlaylists = await spotifyApi.getUserPlaylists();
+    console.log("Total de playlists que eu tenho:", minhasPlaylists.body.total);
+    // console.log(minhasPlaylists.body.items[0].name);
+
+    const listaDePlaylists = minhasPlaylists.body.items;
+    listaDePlaylists.forEach((playlist, posicao) => {
+      console.log(
+        `A playlist na posição ${posicao} é a ${playlist.name} - ID: ${playlist.id}`,
+      );
+    });
+
     resposta.send("Troca concluída! Olhe o seu terminal.");
   } catch (erro) {
     console.log("Ops, deu um problema:", erro);
     resposta.send("Houve um erro na comunicação.");
   }
 });
+
+// ESTUDO
 
 app.get("/sobre", (requisicao, resposta) => {
   resposta.send("Criado por Leonardo Candusso, com ajuda do GEMINI");
