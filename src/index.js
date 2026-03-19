@@ -51,6 +51,26 @@ app.get("/callback", async (requisicao, resposta) => {
   }
 });
 
+app.get("/sobre", (requisicao, resposta) => {
+  resposta.send("Criado por Leonardo Candusso, com ajuda do GEMINI");
+});
+
+app.get("/papagio", (requisicao, resposta) => {
+  const palavraSecreta = requisicao.query.mensagem;
+  resposta.send(`O papagio repete: ${palavraSecreta}`);
+});
+
+app.get("/perfil/:nome", (requisicao, resposta) => {
+  const nomeUsuario = requisicao.params.nome;
+  resposta.send(`Bem-vindo ao perfil super secreto de: ${nomeUsuario}`);
+});
+
+app.get("/bonito", (requisicao, resposta) => {
+  resposta.send(
+    "<h1>Olá, Mundo!</h1> <p>Este é o meu servidor <b>Express</b>.</p>",
+  );
+});
+
 // ==========================================
 // BLOCO 4: INICIALIZAÇÃO
 // O comando de escutar a porta fica SEMPRE no final do arquivo.
