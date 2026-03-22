@@ -76,6 +76,24 @@ app.get("/callback", async (requisicao, resposta) => {
   }
 });
 
+app.get("/playlist/:id", async (requisicao, resposta) => {
+  try {
+    const idPlaylist = requisicao.params.id;
+    const musicasPlaylist = await spotifyApi.getPlaylist(idPlaylist);
+
+    const listaDeMusicas = musicasPlaylist.body.items.items;
+
+    listaDeMusicas.forEach((musica, posicao) => {
+      console.log(`A música na posição ${posicao} é a ${musica.item.name}`);
+    });
+
+    resposta.send("Músicas carregadas com sucesso! Olhe o seu terminal.");
+  } catch (erro) {
+    console.log("Ops, deu um problema:", erro);
+    resposta.send("Houve um erro na comunicação.");
+  }
+});
+
 // ESTUDO
 
 app.get("/sobre", (requisicao, resposta) => {
