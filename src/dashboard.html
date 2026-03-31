@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel de Debug - Atualizador</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #121212;
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #ffffff;
+      }
+      p {
+        color: #aaaaaa;
+        margin-bottom: 40px;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+      .card {
+        background-color: #1e1e1e;
+        padding: 30px;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .card h2 {
+        margin-top: 0;
+      }
+      .spotify-card {
+        border-top: 5px solid #1db954;
+      }
+      .youtube-card {
+        border-top: 5px solid #ff0000;
+      }
+      .btn {
+        display: block;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        transition: 0.2s;
+      }
+      .btn-spotify {
+        background-color: #1db954;
+      }
+      .btn-spotify:hover {
+        background-color: #169c46;
+      }
+      .btn-youtube {
+        background-color: #ff0000;
+      }
+      .btn-youtube:hover {
+        background-color: #cc0000;
+      }
+      .btn-acao {
+        background-color: #333333;
+        border: 1px solid #555;
+      }
+      .btn-acao:hover {
+        background-color: #444444;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Painel de Controle 🎛️</h1>
+    <p>Área de testes do desenvolvedor.</p>
+
+    <div class="container">
+      <div class="card spotify-card">
+        <h2 style="color: #1db954">Spotify</h2>
+        <a href="/login" class="btn btn-spotify">1. Fazer Login</a>
+        <p style="font-size: 12px; color: #888">
+          Altere o ID na URL para testar:
+        </p>
+        <a href="/playlist/COLOQUE_O_ID_AQUI" class="btn btn-acao"
+          >2. Ler Playlist (Teste)</a
+        >
+      </div>
+
+      <div class="card youtube-card">
+        <h2 style="color: #ff0000">YouTube</h2>
+        <a href="/login-youtube" class="btn btn-youtube">1. Fazer Login</a>
+        <a href="/teste-pesquisa" class="btn btn-acao">2. Pesquisar Música</a>
+        <a href="/criar-playlist" class="btn btn-acao">3. Criar Playlist</a>
+        <a
+          href="/adicionar-musica"
+          class="btn btn-acao"
+          style="border-color: #ffd700"
+          >4. Inserir Música (Pendente)</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

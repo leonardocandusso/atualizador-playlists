@@ -34,19 +34,6 @@ router.get("/login", (requisicao, resposta) => {
   resposta.redirect(linkDeLogin);
 });
 
-router.get("/", (requisicao, resposta) => {
-  resposta.send(`
-    <div style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
-      <h1>Bem-vindo ao Atualizador de Playlists 🎧</h1>
-      <p>Transfira suas músicas entre Spotify e YouTube facilmente.</p>
-      <br>
-      <a href="/login" style="padding: 10px 20px; background-color: #1DB954; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
-        Entrar com o Spotify
-      </a>
-    </div>
-  `);
-});
-
 router.get("/callback", async (requisicao, resposta) => {
   try {
     const codigoSpotify = requisicao.query.code;
