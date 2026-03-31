@@ -37,9 +37,7 @@ router.get("/callback-youtube", async (requisicao, resposta) => {
 
     console.log(tokens.access_token);
 
-    resposta.send(
-      "Login no YouTube realizado com sucesso! Olhe o seu terminal.",
-    );
+    resposta.redirect("/");
   } catch (erro) {
     console.log("Ops, deu um problema:", erro);
     resposta.send("Houve um erro na comunicação.");

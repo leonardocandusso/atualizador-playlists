@@ -54,7 +54,7 @@ router.get("/callback", async (requisicao, resposta) => {
       );
     });
 
-    resposta.send("Troca concluída! Olhe o seu terminal.");
+    resposta.redirect("/");
   } catch (erro) {
     console.log("Ops, deu um problema:", erro);
     resposta.send("Houve um erro na comunicação.");
