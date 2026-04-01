@@ -82,11 +82,40 @@ router.get("/criar-playlist", async (requisicao, resposta) => {
       },
     });
 
-    console.log(`Playlist: ${respostaPlaylist.data.id}`);
-    resposta.send(`Playlist criada`);
+    console.log(`Criada a playlist: ${respostaPlaylist.data.id}`);
+    resposta.redirect("/");
   } catch (erro) {
     console.log("Ops, deu um problema:", erro);
     resposta.send("Houve um erro na comunicação.");
   }
 });
+
+router.get("/adicionar-musica", async (requisicao, resposta) => {
+  try {
+    const youtube = google.youtube({ version: "v3", auth: clienteYouTube });
+    const idDaPlaylist = "PLfqdUmOha8L6kiVfwfaNRF4l3stJJfg1T";
+    const idDoVideo = "I_jBp08Kdgw";
+
+    const respostaAdicao = await youtube.playlistItems.insert({
+      part: "snippet",
+      requestBody: {
+        snippet: {
+          playlistId: idDaPlaylist,
+          position: 0,
+          resourceId: {
+            kind: "youtube#video",
+            videoId: idDoVideo,
+          },
+        },
+      },
+    });
+
+    console.log("Música adicionada com sucesso!");
+    resposta.redirect("/");
+  } catch (erro) {
+    console.log("Ops, deu um problema:", erro);
+    resposta.send("Houve um erro na comunicação.");
+  }
+});
+
 module.exports = router;
